@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { newsController } from '../controllers/news.js'
+import { validatorNews } from "../validators/news.js"
 
 const router = Router()
 
@@ -13,9 +14,13 @@ const {
 
 //localhost:400/news
 router.get('/', getNews)
-router.get('/', getNewsByID)
-router.post('/', createNews)
-router.patch('/', updateNews)
-router.delete('/', removeNews)
+
+// localhost:4000/news/:id  --> params
+// localhost:4000/news?id=  --> query
+router.get('/:id', getNewsByID)
+
+router.post('/', validatorNews, createNews)
+router.patch('/:id', updateNews)
+router.delete('/:id', removeNews)
 
 export { router }

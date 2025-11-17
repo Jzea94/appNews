@@ -1,15 +1,16 @@
 import mongoose from "mongoose"
 
-const testScheme = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const testScheme = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true
+    }
   },
-  createdAt: {
-    type: Date,
-    default: new Date().toString()
+  {
+    timestamps: true,
   }
-})
+)
 
 const Test = mongoose.model('Test', testScheme)
 
