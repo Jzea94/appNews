@@ -7,7 +7,7 @@ export const validatorNews = [
     .trim()
     .escape()
     .isString().withMessage('Title must be a string')
-    .isLength({ max: 15 }).withMessage('Title must be less than 15 characters')
+    .isLength({ max: 25 }).withMessage('Title must be less than 25 characters')
     .notEmpty().withMessage('Title cannot be empty'),
   
   body('content')
@@ -16,7 +16,7 @@ export const validatorNews = [
     .trim()
     .escape()
     .isString().withMessage('Content must be a string')
-    .isLength({ min: 5, max: 50 }).withMessage('Content must be between 5 and 50 characters')
+    .isLength({ min: 5, max: 150 }).withMessage('Content must be between 5 and 150 characters')
     .notEmpty().withMessage('Content cannot be empty'),
   
   body('author')

@@ -1,48 +1,73 @@
-import News from '../models/news.js'
+import News from '../models/News.js'
 
 export class newsController {
   
   static getNews = async (req, res) =>  {
-    const data = await News.find()
-    res.json({ news: data })
+    try {
+      const data = await News.find()
+      res.json(data)
+      
+    } catch (error) {
+      res.status(500).json({msg: 'Error getting news', error})
+    }
   }
-
+  
   static getNewsByID = async (req, res) => {
-    const { id } = req.params
-    const data = await News.findById(id)
-    res.json({ news: data })
+    try {
+      const { id } = req.params
+      const data = await News.findById(id)
+      res.json(data)
+      
+    } catch (error) {
+      res.status(500).json({msg: 'News not found', error})      
+    }
   }
-
+  
   static createNews = async (req, res) => {    
-    const { title, content, author } = req.body
-    const data = await News.create({
-      title: title,
-      content: content,
-      author: author
-    })
-    res.json( data )
+    try {
+      const { title, content, author } = req.body
+      const data = await News.create({
+        title: title,
+        content: content,
+        author: author,
+      })
+      res.status(201).json(data)
+      
+    } catch (error) {
+      res.status(500).json({msg: 'Error creating news', error})      
+    }
   }
 
   static updateNews = async (req, res) => {
-    const { id } = req.params
-    const { title, content, author } = req.body
-    const data = await News.updateOne(
-      { _id: id },
-      { $set: {
-        title: title,
-        content: content,
-        author: author
-      }}
-    )
-    res.json(data)
+    try {
+      const { id } = req.params
+      const { title, content, author } = req.body
+      const data = await News.updateOne(
+        { _id: id },
+        { $set: {
+          title: title,
+          content: content,
+          author: author
+        }}
+      )
+      res.json(data)
+      
+    } catch (error) {
+      res.status(500).json({msg: 'Error updating news', error})
+    }
   }
 
   static removeNews = async (req, res) => {
-    const { id } = req.params
-    const data = await News.deleteOne({
-      _id: id
-    })
+    try {
+      const { id } = req.params
+      const data = await News.deleteOne({
+        _id: id
+      })
+      res.json({msg: 'News deleted'})
 
-    res.json(`News deleted: ${ data }`)
+    } catch (error) {
+      res.status(500).json({msg: 'Error deleting news', error})
+    }
+    
   }
 }

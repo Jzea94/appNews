@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { newsController } from '../controllers/news.js'
 import { validatorNews } from "../validators/news.js"
+import { authRequired } from "../middlewares/auth.js";
 
 const router = Router()
 
@@ -19,8 +20,9 @@ router.get('/', getNews)
 // localhost:4000/news?id=  --> query
 router.get('/:id', getNewsByID)
 
-router.post('/', validatorNews, createNews)
-router.patch('/:id', updateNews)
-router.delete('/:id', removeNews)
+// rutas protegidas
+router.post('/', authRequired, validatorNews, createNews)
+router.patch('/:id', authRequired, validatorNews, updateNews)
+router.delete('/:id', authRequired, removeNews)
 
 export { router }
