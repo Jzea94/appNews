@@ -24,8 +24,14 @@ export const getNewsByID = async (req, res) => {
 
 export const createNews = async (req, res) => {    
   try {
-    const {title, content, tags, author} = req.body
-    const data = await News.create()
+    const { title, content, tags, author } = req.body
+    const data = await News.insertOne({
+      title: title,
+      content: content,
+      tags: tags,
+      author: author
+    })
+    console.log('data',data);
     res.status(201).json(data)
     
   } catch (error) {

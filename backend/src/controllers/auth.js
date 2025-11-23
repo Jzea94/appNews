@@ -85,19 +85,13 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) => {
-  
-  try {
-    res.clearCookie('token', token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-    })
-  
-    res.status(200).json({ msg: "Logout successfully" })
-    
-  } catch (error) {
-    res.status(500).json({ msg: "Error deleting cookie", error})
-  }
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax"
+  });
 
-}
+  res.json({ msg: "Logout exitoso" });
+};
+
 
