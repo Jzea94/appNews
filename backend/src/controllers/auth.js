@@ -14,7 +14,7 @@ export const singup = async (req, res) => {
       return res.json('Username is not available')
     
     const data = new User({ username, email, password })
-    await data.save()
+    await data.save() // -> dispara el pre-save y se ejcuta el hashing de la password
 
     res.status(201).json({
       msg: "User created successfully",
@@ -62,20 +62,42 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1d"}
     )
-    
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60
+    })
+
     res.json({
-      token,
+      msg: "Loging successfully",
       user: {
         id: user._id,
         username: user.username,
-        email: user.email,
-        role: user.role
+        email: user.email
       }
     })
 
   } catch (error) {
     res.status(500).json({msg: 'Error server internal', error })
-    console.log(error);
   }
+}
+
+export const logout = (req, res) => {
+  
+  try {
+    res.clearCookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    })
+  
+    res.status(200).json({ msg: "Logout successfully" })
+    
+  } catch (error) {
+    res.status(500).json({ msg: "Error deleting cookie", error})
+  }
+
 }
 

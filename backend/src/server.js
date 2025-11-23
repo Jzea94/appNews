@@ -5,18 +5,17 @@ import { createInitialSuperAdmin } from './config/createSuperAdmin.js'
 import 'dotenv/config';
 
 
-// Init Server
 const PORT = process.env.PORT || 4000
 
 // Permite gestionar un grupo de rutas bajo un prefijo especifico
 // http://localhost:4000/
-  app.use('/', router)
-  
-  app.listen(PORT, () => {
-    console.log(`🚀 Backend server running on PORT: ${PORT}`)
-  })  
-  
-  // Connection DB
-  connectDB().then(() => {
-    createInitialSuperAdmin()
-  })
+app.use('/', router)
+
+app.listen(PORT, () => {
+  console.log(`🚀 Backend server running on PORT: ${PORT}`)
+})  
+
+// Connection DB
+connectDB().then(() => {
+  createInitialSuperAdmin()
+})

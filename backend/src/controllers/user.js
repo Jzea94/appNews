@@ -5,49 +5,52 @@ export const listUsers = async (req, res) => {
     const users = await User.find().select("-password");
     res.json(users);
   } catch (error) {
-    res.status(500).json({ msg: "Error listando usuarios", error });
+    res.status(500).json({ msg: "Error listing users", error });
   }
 };
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password, role = "admin" } = req.body;
+    const { username, email, password, role } = req.body;
 
     const exists = await User.findOne({ $or: [{ username }, { email }] });
     if (exists)
-      return res.status(400).json({ msg: "Username o email ya están registrados" });
+      return res.status(400).json({ msg: "Username or email is already registered" });
 
     const user = new User({ username, email, password, role });
     await user.save();
 
-    res.status(201).json({ msg: "Usuario creado", user: { id: user._id, username, email, role } });
+    res.status(201).json({ msg: "User created", user: { id: user._id, username, email, role } });
   } catch (error) {
-    res.status(500).json({ msg: "Error creando usuario", error });
+    res.status(500).json({ msg: "Error creating user", error });
   }
 };
 
 export const updateUser = async (req, res) => {
   try {
-    const { email, role, isActive } = req.body;
+    const { username, email, role, isActive } = req.body;
 
     const updated = await User.findByIdAndUpdate(
       req.params.id,
-      { email, role, isActive },
-      { new: true }
+      { username, email, role, isActive },
+      { new: true,
+        runValidators: true,
+        context: "query"
+      }
     ).select("-password");
 
     res.json(updated);
   } catch (error) {
-    res.status(500).json({ msg: "Error actualizando usuario", error });
+    res.status(500).json({ msg: "Error updating user", error });
   }
 };
 
 export const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
-    res.json({ msg: "Usuario eliminado" });
+    res.json({ msg: "user deleted" });
   } catch (error) {
-    res.status(500).json({ msg: "Error eliminando usuario", error });
+    res.status(500).json({ msg: "Error deleting user", error });
   }
 };
 
@@ -58,8 +61,8 @@ export const toggleActiveStatus = async (req, res) => {
     user.isActive = !user.isActive;
     await user.save();
 
-    res.json({ msg: `Usuario ahora está ${user.isActive ? "activo" : "inactivo"}` });
+    res.json({ msg: `User is now ${user.isActive ? "active" : "inactive"}` });
   } catch (error) {
-    res.status(500).json({ msg: "Error cambiando estado", error });
+    res.status(500).json({ msg: "Error changing state", error });
   }
 };

@@ -1,6 +1,6 @@
 import { body, validationResult } from 'express-validator'
 
-export const validatorNews = [
+export const newsValidators = [
   body('title')
     .exists().withMessage('Title is required')        // ← Verifica existencia
     .bail()                                           // ← Si falla, para aquí
@@ -11,8 +11,8 @@ export const validatorNews = [
     .notEmpty().withMessage('Title cannot be empty'),
   
   body('content')
-    .exists().withMessage('Content is required')      // ← Verifica existencia
-    .bail()                                           // ← Si falla, para aquí
+    .exists().withMessage('Content is required')      
+    .bail()                                           
     .trim()
     .escape()
     .isString().withMessage('Content must be a string')
@@ -20,18 +20,9 @@ export const validatorNews = [
     .notEmpty().withMessage('Content cannot be empty'),
   
   body('author')
-    .exists().withMessage('Author is required')       // ← Verifica existencia
-    .bail()                                           // ← Si falla, para aquí
+    .exists().withMessage('Author is required')       
+    .bail()                                           
     .trim()
     .isString().withMessage('Author must be a string')
     .notEmpty().withMessage('Author cannot be empty'),
-
-  (req, res, next) => {
-    try {
-      validationResult(req).throw()
-      return next()
-    } catch (error) {
-      res.status(400).send({ errors: error.array() }) 
-    }
-  }
 ]

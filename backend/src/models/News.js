@@ -11,6 +11,10 @@ const newsScheme = new mongoose.Schema(
       type: String,
       require: true
     },
+    tags: {
+      type: String,
+      trim: true
+    },
     author: {
       type: String,
       require: true,

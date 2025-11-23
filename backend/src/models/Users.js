@@ -46,9 +46,25 @@ userScheme.pre('save', async function (next) {
   next()
 })
 
+userScheme.pre('findOneAndUpdate', async function (next) {
+  const update = this.getUpdate()
+  if(update.username) {
+    const exists = await this.model.findOne({ username: update.username })
+    if ( exists ) return next(new Error("Username is already registered"))
+  }
+  if(update.email) {
+    const exists = await this.model.findOne({ email: update.email })
+    if ( exists ) return next(new Error("Email is already registered"))
+  }
+  
+  next()
+})
+
+
 userScheme.methods.comparePassword = function ( candidatePassword ) {
   return bcrypt.compare(candidatePassword, this.password)
 }
+
 
 const User = mongoose.model('User', userScheme)
 
