@@ -61,6 +61,11 @@ export const updateNews = async (req, res) => {
 export const removeNews = async (req, res) => {
   try {
     const { id } = req.params
+
+    const exists = await News.findOne({_id: id}) 
+
+    if(!exists) return res.json({msg: "News not found"})
+
     const data = await News.deleteOne({
       _id: id
     })

@@ -13,4 +13,5 @@ router.post('/login', login)
 
 // localhost:4000/auth/logout
 router.post('/logout', authRequired, logout)
+
 export default router
