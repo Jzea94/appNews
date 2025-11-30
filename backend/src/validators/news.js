@@ -18,6 +18,15 @@ export const newsValidators = [
     .isString().withMessage('Content must be a string')
     .isLength({ min: 5, max: 150 }).withMessage('Content must be between 5 and 150 characters')
     .notEmpty().withMessage('Content cannot be empty'),
+
+    body('tags')
+    .optional()
+    .bail()                                           
+    .trim()
+    .escape()
+    .isString().withMessage('Content must be a string')
+    .isLength({ max: 30 }).withMessage('Content must be less than 300 characters')
+    .notEmpty().withMessage('Content cannot be empty'),
   
   body('author')
     .exists().withMessage('Author is required')       

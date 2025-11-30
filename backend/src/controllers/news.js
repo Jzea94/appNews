@@ -42,12 +42,13 @@ export const createNews = async (req, res) => {
 export const updateNews = async (req, res) => {
   try {
     const { id } = req.params
-    const { title, content, author } = req.body
+    const { title, content, tags, author } = req.body
     const data = await News.updateOne(
       { _id: id },
       { $set: {
         title: title,
         content: content,
+        tags: tags,
         author: author
       }}
     )
