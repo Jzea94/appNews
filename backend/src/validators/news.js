@@ -1,37 +1,74 @@
-import { body, validationResult } from 'express-validator'
+import { body } from "express-validator";
 
-export const newsValidators = [
-  body('title')
-    .exists().withMessage('Title is required')        // ← Verifica existencia
-    .bail()                                           // ← Si falla, para aquí
-    .trim()
-    .escape()
-    .isString().withMessage('Title must be a string')
-    .isLength({ max: 25 }).withMessage('Title must be less than 25 characters')
-    .notEmpty().withMessage('Title cannot be empty'),
-  
-  body('content')
-    .exists().withMessage('Content is required')      
-    .bail()                                           
-    .trim()
-    .escape()
-    .isString().withMessage('Content must be a string')
-    .isLength({ min: 5, max: 150 }).withMessage('Content must be between 5 and 150 characters')
-    .notEmpty().withMessage('Content cannot be empty'),
+export const createNewsValidator = [
+  body("title")
+    .notEmpty().withMessage("El título es obligatorio")
+    .isLength({ min: 5, max: 150 }).withMessage("El título debe tener entre 5 y 150 caracteres"),
 
-    body('tags')
+  body("category")
+    .notEmpty().withMessage("La categoría es obligatoria")
+    .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
+    .withMessage("Categoría inválida"),
+
+  body("author")
+    .notEmpty().withMessage("El autor es obligatorio")
+    .isLength({ min: 3, max: 80 }).withMessage("El autor debe tener entre 3 y 80 caracteres"),
+
+  body("content")
+  .notEmpty().withMessage("El contenido es obligatorio")
+  .isLength({ min: 100, max: 1000 }).withMessage("El extracto debe tener entre 20 y 1000 caracteres"),
+
+  body("readTime")
     .optional()
-    .bail()                                           
-    .trim()
-    .escape()
-    .isString().withMessage('Content must be a string')
-    .isLength({ max: 30 }).withMessage('Content must be less than 300 characters')
-    .notEmpty().withMessage('Content cannot be empty'),
-  
-  body('author')
-    .exists().withMessage('Author is required')       
-    .bail()                                           
-    .trim()
-    .isString().withMessage('Author must be a string')
-    .notEmpty().withMessage('Author cannot be empty'),
-]
+    .isInt({ min: 1, max: 60 }).withMessage("Tiempo de lectura inválido"),
+
+  body("views")
+    .optional()
+    .isInt({ min: 0 }).withMessage("Las vistas deben ser un número positivo"),
+
+  body("image")
+    .notEmpty().withMessage("La imagen es obligatoria")
+    .isURL().withMessage("Debe ser una URL válida"),
+
+  body("excerpt")
+    .notEmpty().withMessage("El extracto es obligatorio")
+    .isLength({ min: 20, max: 300 }).withMessage("El extracto debe tener entre 20 y 300 caracteres"),
+
+  body("featured")
+    .optional()
+    .isBoolean().withMessage("El campo featured debe ser booleano"),
+];
+
+export const updateNewsValidator = [
+  body("title")
+    .optional()
+    .isLength({ min: 5, max: 150 }).withMessage("El título debe tener entre 5 y 150 caracteres"),
+
+  body("category")
+    .optional()
+    .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
+    .withMessage("Categoría inválida"),
+
+  body("author")
+    .optional()
+    .isLength({ min: 3, max: 80 }).withMessage("El autor debe tener entre 3 y 80 caracteres"),
+
+  body("readTime")
+  .not().exists().withMessage("readTime no puede enviarse manualmente"),
+
+  body("views")
+    .optional()
+    .isInt({ min: 0 }).withMessage("Las vistas deben ser un número positivo"),
+
+  body("image")
+    .optional()
+    .isURL().withMessage("Debe ser una URL válida"),
+
+  body("excerpt")
+    .optional()
+    .isLength({ min: 20, max: 300 }).withMessage("El extracto debe tener entre 20 y 300 caracteres"),
+
+  body("featured")
+    .optional()
+    .isBoolean().withMessage("El campo featured debe ser booleano")
+];

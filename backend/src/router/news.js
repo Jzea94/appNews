@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { newsValidators } from "../validators/news.js"
+import { createNewsValidator, updateNewsValidator } from "../validators/news.js"
 import { validateRequest } from "../middlewares/validator.js";
 import { authRequired } from "../middlewares/auth.js";
 import {
@@ -16,8 +16,8 @@ const router = Router()
 router.get('/', getNews)
 router.get('/:id', getNewsByID)
 // rutas protegidas
-router.post('/', authRequired, newsValidators, validateRequest, createNews)
-router.patch('/:id', authRequired, newsValidators, validateRequest, updateNews)
+router.post('/', authRequired, createNewsValidator, validateRequest, createNews)
+router.patch('/:id', authRequired, updateNewsValidator, validateRequest, updateNews)
 router.delete('/:id', authRequired, removeNews)
 
 export { router }
