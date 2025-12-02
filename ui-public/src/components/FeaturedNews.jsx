@@ -1,6 +1,6 @@
-import React from 'react';
 import { TrendingUp, Clock, Eye } from 'lucide-react';
 import { useThemeStore } from '../store/theme';
+import { formatDate } from '../helpers/formatDate';
 
 const FeaturedNews = ({ news }) => {
   const { darkMode } = useThemeStore();
@@ -33,7 +33,7 @@ const FeaturedNews = ({ news }) => {
               {news.category}
             </span>
             <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              {new Date(news.date).toLocaleDateString('es-ES')}
+              {formatDate(news.createdAt)}
             </span>
           </div>
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 leading-tight ${
@@ -54,7 +54,7 @@ const FeaturedNews = ({ news }) => {
               <div className="flex items-center space-x-1">
                 <Clock size={16} className="text-gray-400" />
                 <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                  {news.readTime}
+                  {news.readTime} min
                 </span>
               </div>
               <div className="flex items-center space-x-1">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock, Eye, Bookmark, Share2 } from 'lucide-react';
 import { useThemeStore } from '../store/theme';
+import { formatDate } from '../helpers/formatDate'
 
 const NewsCard = ({ news }) => {
   const { darkMode } = useThemeStore();
@@ -46,7 +47,7 @@ const NewsCard = ({ news }) => {
             {news.category}
           </span>
           <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            {new Date(news.date).toLocaleDateString('es-ES')}
+            {formatDate(news.createdAt)}
           </span>
         </div>
         <h3 className={`text-xl font-bold mb-3 line-clamp-2 leading-tight ${
@@ -64,7 +65,7 @@ const NewsCard = ({ news }) => {
             <div className="flex items-center space-x-1">
               <Clock size={14} className="text-gray-400" />
               <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                {news.readTime}
+                {news.readTime} min
               </span>
             </div>
             <div className="flex items-center space-x-1">
