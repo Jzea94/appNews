@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Tecnología cuántica revoluciona el desarrollo de nuevos medicamentos",
+    "category": "tech",
+    "author": "Laura Méndez",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=1",
+    "excerpt": "Un equipo de investigadores logró utilizar la computación cuántica para simular moléculas complejas en tiempo récord, abriendo una nueva era para el desarrollo farmacéutico.",
+    "featured": true,
+    "content": "La industria farmacéutica ha dado un salto significativo gracias al uso de computadoras cuánticas capaces de simular estructuras moleculares con una precisión nunca antes vista. Según el equipo investigador, las simulaciones que antes tomaban semanas ahora pueden realizarse en minutos. Esto permitirá acelerar la creación de medicamentos para enfermedades complejas, incluyendo cáncer, Alzheimer y dolencias autoinmunes.\n\nLos científicos destacan que esta tecnología no sustituirá los ensayos clínicos, pero sí reducirá drásticamente la fase de investigación y diseño. Empresas del sector ya han mostrado interés en aplicar este avance a sus laboratorios, lo que podría transformar por completo el proceso de fabricación de fármacos durante la próxima década."
+  },
+  {
+    "title": "La volatilidad financiera aumenta por elecciones globales",
+    "category": "economy",
+    "author": "David Herrera",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=2",
+    "excerpt": "Los mercados internacionales experimentan movimientos fuertes debido a procesos electorales simultáneos en diversas regiones del mundo.",
+    "featured": false,
+    "content": "Las bolsas del mundo cerraron la semana con variaciones superiores al 3% debido a una serie de procesos electorales que han generado incertidumbre entre los inversores. Analistas aseguran que la falta de claridad en los resultados de algunos países clave ha aumentado la percepción de riesgo.\n\nA pesar de la volatilidad, bancos internacionales recomendaron cautela en lugar de ventas apresuradas. También indicaron que, históricamente, los períodos electorales tienden a ser seguidos por estabilización económica una vez se confirman los resultados.\n\nEntre los sectores más afectados se encuentran energía, tecnología y manufactura. Las próximas semanas serán decisivas para medir el impacto real en la economía global."
+  },
+  {
+    "title": "Nueva vacuna experimental muestra resultados altamente prometedores",
+    "category": "world",
+    "author": "Mariana Torres",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=3",
+    "excerpt": "Un laboratorio europeo presentó los primeros resultados de su vacuna experimental, alcanzando un 90% de efectividad en pruebas preliminares.",
+    "featured": true,
+    "content": "El laboratorio BioMedical Europe anunció que su vacuna experimental contra una nueva variante viral alcanzó un 90% de efectividad durante su primera fase de ensayos clínicos. El resultado ha sorprendido incluso a la comunidad científica, que esperaba cifras más moderadas.\n\nLos especialistas explicaron que la plataforma utilizada combina ingeniería genética y técnicas de respuesta inmunitaria acelerada. Si los resultados se mantienen en fases posteriores, esta vacuna podría convertirse en una herramienta decisiva para evitar futuras pandemias.\n\nEl estudio continuará con grupos más amplios durante los próximos meses, y los investigadores esperan obtener la aprobación regulatoria en un tiempo récord."
+  },
+  {
+    "title": "El Real Madrid anuncia fichaje millonario de joven promesa sudamericana",
+    "category": "sports",
+    "author": "Carlos Pardo",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=4",
+    "excerpt": "El club blanco sorprendió al mundo con la adquisición de un delantero juvenil que ha logrado récords en tiempo récord.",
+    "featured": false,
+    "content": "En un movimiento inesperado, el Real Madrid cerró la contratación del delantero colombiano Mateo Arango, considerado una de las mayores promesas del continente. Con solo 18 años, Arango ya suma más de 20 goles en la liga sudamericana y ha captado la atención de clubes europeos durante meses.\n\nEl fichaje, valuado en 80 millones de euros, se convierte en uno de los más altos para un jugador de su edad. El entrenador del equipo declaró que el joven delantero encaja perfectamente en el proyecto de renovación del club.\n\nArango viajará a España la próxima semana para iniciar las pruebas médicas y su proceso de adaptación."
+  },
+  {
+    "title": "La inteligencia artificial aumentará la productividad en un 40% para 2030",
+    "category": "tech",
+    "author": "Ana Beltrán",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=5",
+    "excerpt": "Un reciente estudio global reveló que la IA podría incrementar la productividad laboral de forma significativa en la próxima década.",
+    "featured": false,
+    "content": "Un estudio realizado por la consultora GlobalTech Insights concluyó que la adopción masiva de inteligencia artificial podría incrementar la productividad empresarial hasta en un 40% para 2030. Las áreas más beneficiadas incluyen análisis de datos, automatización de procesos y atención al cliente.\n\nLas compañías que han integrado herramientas de IA ya reportan mejoras sustanciales en eficiencia operativa. Sin embargo, el informe también advierte sobre el riesgo de desplazamiento laboral si no se implementan políticas de transición adecuadas.\n\nLos expertos recomiendan programas de capacitación para trabajadores en sectores vulnerables, así como regulaciones claras para evitar el uso indebido de algoritmos."
+  },
+  {
+    "title": "Científicos descubren una nueva especie bioluminiscente en el Pacífico",
+    "category": "world",
+    "author": "Ricardo Gómez",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=6",
+    "excerpt": "Un grupo de biólogos marinos encontró un pequeño cefalópodo con propiedades lumínicas nunca antes vistas.",
+    "featured": false,
+    "content": "A más de 3000 metros de profundidad en el océano Pacífico, investigadores del Instituto Marino Internacional descubrieron una nueva especie de cefalópodo capaz de emitir luz en múltiples tonalidades. Este comportamiento bioluminiscente ha sido descrito como 'único y sorprendente'.\n\nEl líder del equipo explicó que este tipo de organismos podría ayudarnos a comprender mejor los ecosistemas abisales y su evolución. La criatura será catalogada y analizada durante los próximos meses.\n\nEl hallazgo representa uno de los descubrimientos marinos más relevantes del año."
+  },
+  {
+    "title": "La cultura pop domina la taquilla mundial en los últimos estrenos",
+    "category": "culture",
+    "author": "Sofía Morales",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=7",
+    "excerpt": "Películas basadas en cómics y videojuegos superan récords históricos en taquilla.",
+    "featured": false,
+    "content": "Durante el último trimestre, películas inspiradas en franquicias de cómics y videojuegos han dominado la taquilla global, superando incluso a producciones de grandes estudios que tradicionalmente lideraban los estrenos.\n\nLos analistas cinematográficos aseguran que esta tendencia continuará debido al crecimiento de audiencias jóvenes y la nostalgia entre generaciones mayores.\n\nEstudios de Hollywood ya han anunciado nuevas adaptaciones, lo que confirma que la cultura pop seguirá marcando la pauta en los próximos años."
+  },
+  {
+    "title": "Gobiernos anuncian nuevas políticas fiscales para enfrentar la inflación",
+    "category": "economy",
+    "author": "Felipe Vargas",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=8",
+    "excerpt": "Medidas fiscales buscan controlar la inflación y estabilizar el mercado internacional.",
+    "featured": false,
+    "content": "En una serie de comunicados oficiales, varios gobiernos del G20 anunciaron nuevas políticas fiscales destinadas a reducir la inflación que afecta a millones de consumidores. Entre las medidas destacan reducción temporal de impuestos, apoyo a pequeñas empresas y aumento de regulaciones en sectores clave.\n\nLos economistas prevén que estas estrategias comiencen a mostrar efectos positivos en los próximos meses, aunque advierten que la recuperación será gradual.\n\nLas autoridades coincidieron en que se requieren acciones coordinadas para mantener la estabilidad global."
+  },
+  {
+    "title": "La NASA detecta indicios de actividad volcánica reciente en Marte",
+    "category": "tech",
+    "author": "Isabella Ruiz",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=9",
+    "excerpt": "Nuevos datos del orbitador marciano revelan posibles rastros de actividad volcánica más reciente de lo esperado.",
+    "featured": true,
+    "content": "La NASA publicó un informe detallado en el que se analizan nuevas imágenes y mediciones captadas por el orbitador Mars Reconnaissance Orbiter. Según los científicos, existen señales geológicas que indican que Marte podría haber tenido actividad volcánica hace tan solo unos cientos de miles de años.\n\nDe confirmarse, esto cambiaría significativamente la comprensión actual del planeta rojo, ya que sugeriría un núcleo más caliente de lo que se creía.\n\nEl equipo planea continuar investigando estas señales mediante futuras misiones robóticas."
+  },
+  {
+    "title": "Selección sub-20 sorprende con victoria histórica en torneo internacional",
+    "category": "sports",
+    "author": "Mateo Linares",
+    "readTime": 0,
+    "views": 0,
+    "image": "https://picsum.photos/800/400?random=10",
+    "excerpt": "El equipo juvenil venció al campeón vigente en un partido épico que ya está dando de qué hablar.",
+    "featured": false,
+    "content": "La selección sub-20 de Colombia logró una victoria impresionante al derrotar al campeón vigente del torneo juvenil internacional. El partido fue descrito por analistas deportivos como 'uno de los más emocionantes de los últimos años'.\n\nEl técnico destacó el alto nivel de compromiso y disciplina de los jugadores, quienes ahora son considerados favoritos para avanzar a la siguiente fase.\n\nLa prensa internacional ha comenzado a resaltar el potencial de este nuevo grupo de talentos sudamericanos."
+  }
+]
