@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
-import { useThemeStore } from '../store/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = ({ categories, selectedCategory, onCategoryChange }) => {
-  const { darkMode, toggleDarkMode } = useThemeStore();
+  const { darkMode, toggleDarkMode } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

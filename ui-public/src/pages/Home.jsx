@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { newsAPI } from '../api/news.api';
-import { useThemeStore } from '../store/theme';
+import { useTheme } from '../context/ThemeContext';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import FeaturedNews from '../components/FeaturedNews';
@@ -8,7 +8,7 @@ import NewsCard from '../components/NewsCard';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const { darkMode } = useThemeStore();
+  const { darkMode } = useTheme();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -107,7 +107,7 @@ const Home = () => {
       setLoading(false);
     } catch (error) {
       console.error('Error al cargar noticias:', error);
-      setNews(data); // Fallback a mock data
+      setNews(mockNews); // Fallback a mock data
       setLoading(false);
     }
   };

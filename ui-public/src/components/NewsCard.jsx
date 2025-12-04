@@ -1,13 +1,20 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Clock, Eye, Bookmark, Share2 } from 'lucide-react';
-import { useThemeStore } from '../store/theme';
+import { useTheme } from '../context/ThemeContext';
 import { formatDate } from '../helpers/formatDate'
 
 const NewsCard = ({ news }) => {
-  const { darkMode } = useThemeStore();
+  const { darkMode } = useTheme();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/news/${news._id}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <article
+      onClick={handleClick}
       className={`rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1 cursor-pointer ${
         darkMode ? 'bg-gray-900' : 'bg-white'
       }`}
@@ -22,7 +29,7 @@ const NewsCard = ({ news }) => {
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              // Lógica para guardar
+              console.log('Guardar noticia:', news.id);
             }}
             className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors shadow-lg"
           >
@@ -31,7 +38,7 @@ const NewsCard = ({ news }) => {
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              // Lógica para compartir
+              console.log('Compartir noticia:', news.id);
             }}
             className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors shadow-lg"
           >

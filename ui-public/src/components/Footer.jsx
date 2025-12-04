@@ -1,8 +1,7 @@
-import React from 'react';
-import { useThemeStore } from '../store/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Footer = () => {
-  const { darkMode } = useThemeStore();
+  const { darkMode } = useTheme();
 
   return (
     <footer className={`mt-16 border-t ${

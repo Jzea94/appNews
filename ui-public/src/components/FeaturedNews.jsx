@@ -1,16 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import { TrendingUp, Clock, Eye } from 'lucide-react';
-import { useThemeStore } from '../store/theme';
-import { formatDate } from '../helpers/formatDate';
+import { useTheme } from '../context/ThemeContext';
+import { formatDate } from '../helpers/formatDate'
 
 const FeaturedNews = ({ news }) => {
-  const { darkMode } = useThemeStore();
+  const { darkMode } = useTheme();
+  const navigate = useNavigate();
 
   if (!news) return null;
 
+  const handleClick = () => {
+    navigate(`/news/${news._id}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <article className={`mb-12 rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.01] cursor-pointer ${
-      darkMode ? 'bg-gray-900' : 'bg-white'
-    }`}>
+    <article 
+      onClick={handleClick}
+      className={`mb-12 rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.01] cursor-pointer ${
+        darkMode ? 'bg-gray-900' : 'bg-white'
+      }`}
+    >
       <div className="grid md:grid-cols-2 gap-0">
         <div className="relative h-64 md:h-full overflow-hidden">
           <img 
@@ -54,7 +64,7 @@ const FeaturedNews = ({ news }) => {
               <div className="flex items-center space-x-1">
                 <Clock size={16} className="text-gray-400" />
                 <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                  {news.readTime} min
+                  {news.readTime}
                 </span>
               </div>
               <div className="flex items-center space-x-1">

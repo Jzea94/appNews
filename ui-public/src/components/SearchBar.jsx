@@ -1,9 +1,8 @@
-import React from 'react';
 import { Search } from 'lucide-react';
-import { useThemeStore } from '../store/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const SearchBar = ({ searchQuery, onSearchChange }) => {
-  const { darkMode } = useThemeStore();
+  const { darkMode } = useTheme();
 
   return (
     <div className="mb-8">
