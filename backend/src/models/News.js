@@ -6,26 +6,27 @@ const newsSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 5,
-      maxlength: 150
+      minlength: 1,
+      maxlength: 50
     },
     category: {
       type: String,
       required: true,
       enum: ["politics", "sports", "tech", "economy", "world", "culture", "other"],
-      default: "other"
+      default: "other",
+      set: (c) => c.toLowerCase().trim()
     },
     author: {
       type: String,
       required: true,
       trim: true,
-      minlength: 3,
-      maxlength: 80
+      minlength: 1,
+      maxlength: 50
     },
     content: {
       type: String,
       required: true,
-      minlength: 100
+      minlength: 1
     },
     readTime: {
       type: Number,
@@ -46,8 +47,8 @@ const newsSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 20,
-      maxlength: 300
+      minlength: 1,
+      maxlength: 150
     },
     featured: {
       type: Boolean,

@@ -210,7 +210,7 @@ const NewsDetails = () => {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Botón de regreso */}
         <button
-          onClick={() => navigate('/news')}
+          onClick={() => navigate('/')}
           className={`flex items-center space-x-2 mb-6 px-4 py-2 rounded-lg transition-all ${
             darkMode 
               ? 'hover:bg-gray-800 text-gray-300' 

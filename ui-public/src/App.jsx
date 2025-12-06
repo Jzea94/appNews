@@ -8,7 +8,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/news" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/news/:id" element={<NewsDetails />} />
         </Routes>
       </Router>

@@ -3,20 +3,21 @@ import { body } from "express-validator";
 export const createNewsValidator = [
   body("title")
     .notEmpty().withMessage("El título es obligatorio")
-    .isLength({ min: 5, max: 150 }).withMessage("El título debe tener entre 5 y 150 caracteres"),
+    .isLength({ min: 0, max: 50 }).withMessage("El título debe tener entre 5 y 50 caracteres"),
 
   body("category")
     .notEmpty().withMessage("La categoría es obligatoria")
+    .toLowerCase()
     .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
     .withMessage("Categoría inválida"),
 
   body("author")
     .notEmpty().withMessage("El autor es obligatorio")
-    .isLength({ min: 3, max: 80 }).withMessage("El autor debe tener entre 3 y 80 caracteres"),
+    .isLength({ min: 1, max: 50 }).withMessage("El autor debe tener entre 1 y 50 caracteres"),
 
   body("content")
   .notEmpty().withMessage("El contenido es obligatorio")
-  .isLength({ min: 100, max: 1000 }).withMessage("El extracto debe tener entre 20 y 1000 caracteres"),
+  .isLength({ min: 1, max: 1000 }).withMessage("El extracto debe tener entre 1 y 1000 caracteres"),
 
   body("readTime")
     .optional()
@@ -32,7 +33,7 @@ export const createNewsValidator = [
 
   body("excerpt")
     .notEmpty().withMessage("El extracto es obligatorio")
-    .isLength({ min: 20, max: 300 }).withMessage("El extracto debe tener entre 20 y 300 caracteres"),
+    .isLength({ min: 1, max: 150 }).withMessage("El extracto debe tener entre 1 y 150 caracteres"),
 
   body("featured")
     .optional()
@@ -42,16 +43,17 @@ export const createNewsValidator = [
 export const updateNewsValidator = [
   body("title")
     .optional()
-    .isLength({ min: 5, max: 150 }).withMessage("El título debe tener entre 5 y 150 caracteres"),
+    .isLength({ min: 1, max: 150 }).withMessage("El título debe tener entre 1 y 150 caracteres"),
 
   body("category")
     .optional()
+    .toLowerCase()
     .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
     .withMessage("Categoría inválida"),
 
   body("author")
     .optional()
-    .isLength({ min: 3, max: 80 }).withMessage("El autor debe tener entre 3 y 80 caracteres"),
+    .isLength({ min: 1, max: 50 }).withMessage("El autor debe tener entre 1 y 50 caracteres"),
 
   body("readTime")
   .not().exists().withMessage("readTime no puede enviarse manualmente"),
@@ -66,7 +68,7 @@ export const updateNewsValidator = [
 
   body("excerpt")
     .optional()
-    .isLength({ min: 20, max: 300 }).withMessage("El extracto debe tener entre 20 y 300 caracteres"),
+    .isLength({ min: 1, max: 150 }).withMessage("El extracto debe tener entre 1 y 150 caracteres"),
 
   body("featured")
     .optional()
