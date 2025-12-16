@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { login, singup, logout } from "../controllers/auth.js"
+import { login, singup, logout, me } from "../controllers/auth.js"
 import { authRequired } from "../middlewares/auth.js"
 
 const router = Router()
@@ -13,5 +13,7 @@ router.post('/login', login)
 
 // localhost:4000/auth/logout
 router.post('/logout', authRequired, logout)
+
+router.get('/me', authRequired, me)
 
 export default router

@@ -92,6 +92,24 @@ export const logout = (req, res) => {
   });
 
   res.json({ msg: "Logout exitoso" });
-};
+}
 
-
+export const me = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("-password");
+    if (!user) return res.status(404).json({msg: "User not found"});
+    res.json({
+      id: user._id,
+      Username: user.username,
+      email: user.email,
+      role: user.role,
+      isActive: user.isActive,
+      lastLogin: user.lastLogin
+    })
+  } catch (error) {
+    return res.status(500).json({
+      msg: "Error obteniendo usuario",
+      error: error.message
+    })
+  }
+}
