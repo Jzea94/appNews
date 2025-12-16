@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
+            
             <Route 
               path="/dashboard" 
               element={
@@ -21,6 +23,16 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            
+            <Route 
+              path="/users" 
+              element={
+                <ProtectedRoute requireSuperAdmin={true}>
+                  <Users />
+                </ProtectedRoute>
+              } 
+            />
+            
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

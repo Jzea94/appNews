@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
-import { X, Image as ImageIcon } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const categories = ['tech', 'sports', 'politics', 'economy', 'world', 'culture', 'other'];
-
 const NewsForm = ({ news, onSubmit, onCancel }) => {
-  console.log('mw estoy renderizando');
   const { darkMode } = useTheme();
   const [formData, setFormData] = useState({
     title: '',
-    excerpt: '',
     content: '',
-    category: 'other',
+    excerpt: '',
+    category: 'Tecnología',
     image: '',
     author: '',
     featured: false,
@@ -20,13 +17,15 @@ const NewsForm = ({ news, onSubmit, onCancel }) => {
   const [tagInput, setTagInput] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const categories = ['all', 'tech', 'sports', 'politics', 'economy', 'world', 'culture', 'other'];
+
   useEffect(() => {
     if (news) {
       setFormData({
         title: news.title || '',
-        excerpt: news.excerpt || '',
         content: news.content || '',
-        category: news.category || 'other',
+        excerpt: news.excerpt || '',
+        category: news.category || 'tech',
         image: news.image || '',
         author: news.author || '',
         featured: news.featured || false,
@@ -65,7 +64,7 @@ const NewsForm = ({ news, onSubmit, onCancel }) => {
           darkMode ? 'bg-gray-900' : 'bg-white'
         }`}>
           <div className={`flex items-center justify-between p-6 border-b ${
-            darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'
+            darkMode ? 'border-gray-800' : 'border-gray-200'
           } rounded-t-3xl`}>
             <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {news ? 'Editar Noticia' : 'Nueva Noticia'}
@@ -121,7 +120,7 @@ const NewsForm = ({ news, onSubmit, onCancel }) => {
                   } disabled:opacity-50`}
                 >
                   {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat.charAt(0).toUpperCase()+cat.slice(1)}</option>
+                    <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
               </div>
@@ -152,23 +151,20 @@ const NewsForm = ({ news, onSubmit, onCancel }) => {
               <label className={`block text-sm font-medium mb-2 ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                URL de la imagen *
+                URL de la imagen
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="url"
-                  required
-                  disabled={loading}
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className={`flex-1 px-4 py-3 rounded-xl border transition-all outline-none ${
-                    darkMode
-                      ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500'
-                      : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
-                  } disabled:opacity-50`}
-                  placeholder="https://ejemplo.com/imagen.jpg"
-                />
-              </div>
+              <input
+                type="url"
+                disabled={loading}
+                value={formData.image}
+                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                className={`w-full px-4 py-3 rounded-xl border transition-all outline-none ${
+                  darkMode
+                    ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500'
+                    : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                } disabled:opacity-50`}
+                placeholder="https://ejemplo.com/imagen.jpg"
+              />
               {formData.image && (
                 <img 
                   src={formData.image} 
@@ -183,10 +179,9 @@ const NewsForm = ({ news, onSubmit, onCancel }) => {
               <label className={`block text-sm font-medium mb-2 ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Resumen *
+                Resumen
               </label>
               <textarea
-                required
                 rows={3}
                 disabled={loading}
                 value={formData.excerpt}

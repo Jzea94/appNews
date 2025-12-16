@@ -1,73 +1,78 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Plus, Search, Filter } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Plus, Search, Filter, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { newsAPI } from '../api/news.api';
 import Navbar from '../components/Navbar';
 import NewsForm from '../components/NewsForm';
 import NewsTable from '../components/NewsTable';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { darkMode } = useTheme();
+  const { user } = useAuth();
   const [news, setNews] = useState([]);
+  const [filteredNews, setFilteredNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingNews, setEditingNews] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterCategory, setFilterCategory] = useState('All');
-  
-  const isFormOpening = useRef(false);
+  const [filterCategory, setFilterCategory] = useState('all');
 
-  const categories = ['All', 'Tech', 'Sports', 'Politics', 'Economy', 'World', 'Culture', 'Other'];
+  const categories = ['all', 'tech', 'sports', 'politics', 'economy', 'world', 'culture', 'other'];
 
-  // Usar useCallback para evitar recreación de funciones
-  const loadNews = useCallback(async () => {
+  const isSuperAdmin = user?.role === 'superadmin';
+
+  useEffect(() => {
+    loadNews();
+  }, []);
+
+  useEffect(() => {
+    filterNews();
+  }, [news, searchQuery, filterCategory]);
+
+  const loadNews = async () => {
     try {
       setLoading(true);
       const data = await newsAPI.getAllNews();
       setNews(data);
+      setLoading(false);
     } catch (error) {
       console.error('Error:', error);
-    } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    console.log('render desde dashboard: 1');
-    loadNews();
-  }, []);
+  const filterNews = () => {
+    let filtered = news;
 
-  // Usar useMemo para filteredNews para evitar renderizados innecesarios
-    const filteredNews = useMemo(() => {
-      let filtered = news;
-      
-      if (filterCategory !== 'All') {
-        filtered = filtered.filter(item => item.category.toLowerCase() === filterCategory.toLowerCase());
-      }
-      
-      if (searchQuery) {
-        filtered = filtered.filter(item =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.author.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }
-      
-      return filtered;
-    }, [news, searchQuery, filterCategory]);
+    if (filterCategory !== 'all') {
+      filtered = filtered.filter(item => item.category === filterCategory);
+    }
 
-  // Usar useCallback para las funciones handlers
-  const handleCreate = useCallback(async (formData) => {
+    if (searchQuery) {
+      filtered = filtered.filter(item =>
+        item.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.author?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredNews(filtered);
+  };
+
+  const handleCreate = async (formData) => {
     try {
       await newsAPI.createNews(formData);
       await loadNews();
       setShowForm(false);
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al crear la noticia');
+      alert(error.response?.data?.msg || 'Error al crear la noticia');
     }
-  }, [loadNews]);
+  };
 
-  const handleUpdate = useCallback(async (formData) => {
+  const handleUpdate = async (formData) => {
     try {
       await newsAPI.updateNews(editingNews._id, formData);
       await loadNews();
@@ -75,11 +80,11 @@ const Dashboard = () => {
       setEditingNews(null);
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al actualizar la noticia');
+      alert(error.response?.data?.msg || 'Error al actualizar la noticia');
     }
-  }, [editingNews, loadNews]);
+  };
 
-  const handleDelete = useCallback(async (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm('¿Estás seguro de eliminar esta noticia?')) return;
 
     try {
@@ -87,31 +92,21 @@ const Dashboard = () => {
       await loadNews();
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al eliminar la noticia');
+      alert(error.response?.data?.msg || 'Error al eliminar la noticia');
     }
-  }, [loadNews]);
+  };
 
-  const openEditForm = useCallback((newsItem) => {
-    // Evitar múltiples llamadas si ya se está abriendo
-    if (isFormOpening.current) return;
-    
-    isFormOpening.current = true;
+  const openEditForm = (newsItem) => {
     setEditingNews(newsItem);
     setShowForm(true);
-    
-    // Resetear después de un breve tiempo
-    setTimeout(() => {
-      isFormOpening.current = false;
-    }, 100);
-  }, []);
+  };
 
-  const closeForm = useCallback(() => {
+  const closeForm = () => {
     setShowForm(false);
     setEditingNews(null);
-  }, []);
+  };
 
-    // Renderizado condicional mejorado
-  if (loading && news.length === 0) {
+  if (loading) {
     return (
       <div className={`min-h-screen ${darkMode ? 'bg-gray-950' : 'bg-gray-50'}`}>
         <Navbar />
@@ -139,15 +134,26 @@ const Dashboard = () => {
               {filteredNews.length} {filteredNews.length === 1 ? 'noticia' : 'noticias'}
             </p>
           </div>
-          <button
-            onClick={() => setShowForm(true)}
-            className="flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl transition-all shadow-lg"
-          >
-            <Plus size={20} />
-            <span>Nueva Noticia</span>
-          </button>
+          <div className="flex gap-3">
+            {isSuperAdmin && (
+              <button
+                onClick={() => navigate('/users')}
+                className="flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-xl transition-all shadow-lg"
+              >
+                <Users size={20} />
+                <span>Usuarios</span>
+              </button>
+            )}
+            <button
+              onClick={() => setShowForm(true)}
+              className="flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl transition-all shadow-lg"
+            >
+              <Plus size={20} />
+              <span>Nueva Noticia</span>
+            </button>
+          </div>
         </div>
-        {/*SearchaBar*/}
+
         <div className="grid md:grid-cols-2 gap-4 mb-8">
           <div className={`relative rounded-xl overflow-hidden ${
             darkMode ? 'bg-gray-900' : 'bg-white'
@@ -165,7 +171,7 @@ const Dashboard = () => {
               }`}
             />
           </div>
-          {/*Filter Options*/}
+
           <div className={`relative rounded-xl overflow-hidden ${
             darkMode ? 'bg-gray-900' : 'bg-white'
           } shadow-lg`}>
@@ -180,7 +186,7 @@ const Dashboard = () => {
               }`}
             >
               {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
               ))}
             </select>
           </div>
@@ -195,7 +201,6 @@ const Dashboard = () => {
 
       {showForm && (
         <NewsForm
-          key={editingNews?._id}
           news={editingNews}
           onSubmit={editingNews ? handleUpdate : handleCreate}
           onCancel={closeForm}

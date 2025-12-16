@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../api/auth.api';
 
 const AuthContext = createContext();
@@ -16,15 +16,16 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar sesión al cargar
     checkAuth();
   }, []);
 
   const checkAuth = async () => {
     try {
+      // Llama a /auth/me para verificar si hay sesión activa
       const data = await authAPI.me();
-      setUser(data.user);
+      setUser(data);
     } catch (error) {
+      // Si falla (401), el usuario no está autenticado
       setUser(null);
     } finally {
       setLoading(false);
@@ -33,21 +34,31 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (identifier, password) => {
     try {
-      const data = await authAPI.login(identifier, password);
-      setUser(data.user);
+      await authAPI.login(identifier, password);
+      // Después del login, obtener datos del usuario
+      const userData = await authAPI.me();
+      setUser(userData);
       return { success: true };
     } catch (error) {
-      return { success: false, error: error.message };
+      return { 
+        success: false, 
+        error: error.response?.data?.msg || 'Error al iniciar sesión' 
+      };
     }
   };
 
   const logout = async () => {
-    await authAPI.logout();
-    setUser(null);
+    try {
+      await authAPI.logout();
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    } finally {
+      setUser(null);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );

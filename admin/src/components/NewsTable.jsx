@@ -16,32 +16,27 @@ const NewsTable = ({ news, onEdit, onDelete }) => {
               <th className={`px-6 py-4 text-left text-sm font-semibold ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                News
+                Noticia
               </th>
               <th className={`px-6 py-4 text-left text-sm font-semibold ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Category
+                Categoría
               </th>
               <th className={`px-6 py-4 text-left text-sm font-semibold ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Author
+                Autor
               </th>
               <th className={`px-6 py-4 text-left text-sm font-semibold ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Date
-              </th>
-              <th className={`px-6 py-4 text-left text-sm font-semibold ${
-                darkMode ? 'text-gray-300' : 'text-gray-700'
-              }`}>
-                Views
+                Fecha
               </th>
               <th className={`px-6 py-4 text-right text-sm font-semibold ${
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Actions
+                Acciones
               </th>
             </tr>
           </thead>
@@ -52,11 +47,13 @@ const NewsTable = ({ news, onEdit, onDelete }) => {
               }`}>
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-3">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-16 h-16 rounded-lg object-cover"
-                    />
+                    {item.image && (
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-16 h-16 rounded-lg object-cover"
+                      />
+                    )}
                     <div className="flex-1 min-w-0">
                       <p className={`font-semibold truncate ${
                         darkMode ? 'text-white' : 'text-gray-900'
@@ -82,13 +79,7 @@ const NewsTable = ({ news, onEdit, onDelete }) => {
                   {item.author}
                 </td>
                 <td className={`px-6 py-4 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {formatDate(item.createdAt)}
-                </td>
-                <td className={`px-6 py-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  <div className="flex items-center space-x-1">
-                    <Eye size={16} />
-                    <span>{item.views || 0}</span>
-                  </div>
+                  { formatDate(item.updatedAt) }
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-end space-x-2">

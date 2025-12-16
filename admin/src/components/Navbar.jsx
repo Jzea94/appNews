@@ -10,8 +10,8 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/login');
   };
 
@@ -57,7 +57,7 @@ const Navbar = () => {
               >
                 <User size={18} />
                 <span className="hidden md:inline font-medium">
-                  {user?.name || 'Usuario'}
+                  {user?.username || 'Usuario'}
                 </span>
               </button>
 
@@ -69,10 +69,13 @@ const Navbar = () => {
                     darkMode ? 'border-gray-700' : 'border-gray-200'
                   }`}>
                     <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {user?.name}
+                      {user?.username}
                     </p>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                       {user?.email}
+                    </p>
+                    <p className={`text-xs mt-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                      {user?.role === 'superadmin' ? 'Super Admin' : 'Admin'}
                     </p>
                   </div>
                   <button
