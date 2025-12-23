@@ -7,7 +7,7 @@ const newsSchema = new mongoose.Schema(
       required: true,
       trim: true,
       minlength: 1,
-      maxlength: 50
+      maxlength: 150
     },
     category: {
       type: String,
@@ -48,7 +48,7 @@ const newsSchema = new mongoose.Schema(
       required: true,
       trim: true,
       minlength: 1,
-      maxlength: 150
+      maxlength: 250
     },
     featured: {
       type: Boolean,
