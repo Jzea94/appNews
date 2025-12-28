@@ -11,10 +11,6 @@ export const createNewsValidator = [
     .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
     .withMessage("Categoría inválida"),
 
-  body("author")
-    .notEmpty().withMessage("El autor es obligatorio")
-    .isLength({ min: 1, max: 50 }).withMessage("El autor debe tener entre 1 y 50 caracteres"),
-
   body("content")
   .notEmpty().withMessage("El contenido es obligatorio")
   .isLength({ min: 1, max: 1000 }).withMessage("El extracto debe tener entre 1 y 1000 caracteres"),
@@ -50,10 +46,6 @@ export const updateNewsValidator = [
     .toLowerCase()
     .isIn(["politics", "sports", "tech", "economy", "world", "culture", "other"])
     .withMessage("Categoría inválida"),
-
-  body("author")
-    .optional()
-    .isLength({ min: 1, max: 150 }).withMessage("El autor debe tener entre 1 y 50 caracteres"),
 
   body("readTime")
   .not().exists().withMessage("readTime no puede enviarse manualmente"),

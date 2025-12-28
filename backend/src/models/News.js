@@ -17,11 +17,9 @@ const newsSchema = new mongoose.Schema(
       set: (c) => c.toLowerCase().trim()
     },
     author: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: 1,
-      maxlength: 50
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
     },
     content: {
       type: String,

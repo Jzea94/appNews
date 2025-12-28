@@ -4,6 +4,8 @@ import News from '../models/News.js'
 export const getNews = async (req, res) =>  {
   try {
     const data = await News.find()
+      .populate("author", "username email")
+      .sort({ createdAt: -1 });
     res.json(data)
     
   } catch (error) {
@@ -15,11 +17,10 @@ export const getNewsByID = async (req, res) => {
   try {
     const { id } = req.params
     // Incrementa usando $inc para evitar condiciones de carrera
-    const news = await News.findByIdAndUpdate(
-      id,
-      { $inc: { views: 1 } },
-      { new: true }
-    );
+    const news = await News.findByIdAndUpdate(id, { $inc: { views: 1 } }, { new: true })
+      .populate("author", "username email")
+      .sort({ createdAt: -1 });
+
     if (!news) {
       return res.status(404).json({ msg: "Noticia no encontrada" });
     }
@@ -33,11 +34,11 @@ export const getNewsByID = async (req, res) => {
 
 export const createNews = async (req, res) => {    
   try {
-    const { title, category, author, content, views, image, excerpt, featured } = req.body
+    const { title, category, content, views, image, excerpt, featured } = req.body
     const data = await News.create({
       title,
       category,
-      author,
+      author: req.userId,
       content,
       views,
       image,

@@ -59,12 +59,12 @@ const FeaturedNews = ({ news }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 text-sm">
               <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                Por {news.author}
+                Por {news.author.username}
               </span>
               <div className="flex items-center space-x-1">
                 <Clock size={16} className="text-gray-400" />
                 <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                  {news.readTime}
+                  {news.readTime} min
                 </span>
               </div>
               <div className="flex items-center space-x-1">

@@ -85,7 +85,7 @@ const NewsCard = ({ news }) => {
           <span className={`text-xs font-medium ${
             darkMode ? 'text-gray-400' : 'text-gray-500'
           }`}>
-            {news.author}
+            {news.author.username}
           </span>
         </div>
       </div>

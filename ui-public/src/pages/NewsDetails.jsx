@@ -29,85 +29,6 @@ const NewsDetails = () => {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Mock data para desarrollo
-  const mockNewsDetail = {
-    id: 1,
-    title: "Avances revolucionarios en inteligencia artificial transforman la industria tecnológica",
-    category: "Tecnología",
-    author: "María González",
-    authorBio: "Periodista especializada en tecnología con 10 años de experiencia",
-    authorImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
-    date: "2024-11-30",
-    readTime: "5 min",
-    views: "15.2k",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=600&fit=crop",
-    excerpt: "Las nuevas capacidades de IA están redefiniendo cómo las empresas operan y cómo interactuamos con la tecnología en nuestra vida diaria.",
-    content: `
-      <p>La inteligencia artificial ha experimentado avances sin precedentes en los últimos meses, transformando radicalmente la forma en que las empresas operan y cómo las personas interactúan con la tecnología en su vida cotidiana.</p>
-
-      <h2>Un cambio de paradigma</h2>
-      <p>Los últimos desarrollos en modelos de lenguaje de gran escala (LLM) han demostrado capacidades que hace apenas un año parecían ciencia ficción. Desde la generación de código hasta la creación de contenido multimedia, la IA está democratizando habilidades que antes requerían años de entrenamiento especializado.</p>
-
-      <p>Empresas de todos los tamaños están integrando estas tecnologías en sus flujos de trabajo, mejorando la productividad y permitiendo que los empleados se concentren en tareas de mayor valor agregado.</p>
-
-      <h2>Impacto en diferentes industrias</h2>
-      <p>El sector de la salud ha sido uno de los más beneficiados. Los algoritmos de IA ahora pueden detectar enfermedades con una precisión que rivaliza con la de especialistas humanos, analizando imágenes médicas en segundos y proporcionando diagnósticos preliminares que aceleran el tratamiento.</p>
-
-      <p>En el ámbito educativo, los tutores impulsados por IA están personalizando el aprendizaje a un nivel nunca antes visto, adaptándose al ritmo y estilo de cada estudiante individual.</p>
-
-      <h2>Desafíos éticos y regulatorios</h2>
-      <p>Sin embargo, este rápido avance no viene sin desafíos. Las preocupaciones sobre privacidad, sesgo algorítmico y el impacto en el empleo están generando debates intensos entre legisladores, tecnólogos y la sociedad en general.</p>
-
-      <p>Gobiernos de todo el mundo están trabajando en marcos regulatorios que buscan equilibrar la innovación con la protección de derechos fundamentales. La Unión Europea lidera estos esfuerzos con su AI Act, que establece estándares estrictos para sistemas de IA de alto riesgo.</p>
-
-      <h2>El futuro es ahora</h2>
-      <p>Los expertos predicen que los próximos años traerán avances aún más dramáticos. La integración de IA con otras tecnologías emergentes como computación cuántica y blockchain promete crear sinergias que multiplicarán exponencialmente las capacidades actuales.</p>
-
-      <p>Lo que está claro es que la inteligencia artificial ya no es una tecnología del futuro: es una realidad presente que está redefiniendo nuestro mundo, y aquellos que se adapten más rápidamente tendrán una ventaja significativa en la economía del mañana.</p>
-    `,
-    tags: ["Inteligencia Artificial", "Tecnología", "Innovación", "Futuro", "IA"],
-    featured: true
-  };
-
-  const mockRelatedNews = [
-    {
-      id: 2,
-      title: "Descubren nueva especie marina en las profundidades del océano",
-      category: "Ciencia",
-      author: "Dr. Carlos Ruiz",
-      date: "2024-11-29",
-      readTime: "4 min",
-      views: "8.5k",
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop",
-      excerpt: "Científicos marinos han identificado una fascinante criatura bioluminiscente.",
-      featured: false
-    },
-    {
-      id: 3,
-      title: "El mercado de criptomonedas experimenta un repunte histórico",
-      category: "Finanzas",
-      author: "Laura Martínez",
-      date: "2024-11-29",
-      readTime: "6 min",
-      views: "12.3k",
-      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&h=500&fit=crop",
-      excerpt: "Los inversores muestran renovado optimismo ante las nuevas regulaciones.",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Innovación en energía solar alcanza eficiencia récord del 47%",
-      category: "Tecnología",
-      author: "Roberto Silva",
-      date: "2024-11-28",
-      readTime: "7 min",
-      views: "9.8k",
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=500&fit=crop",
-      excerpt: "Nuevos paneles solares prometen revolucionar la energía limpia.",
-      featured: false
-    }
-  ];
-
   useEffect(() => {
     loadNewsDetail();
   }, [id]);
@@ -133,8 +54,6 @@ const NewsDetails = () => {
       }, 300);
     } catch (error) {
       console.error('Error al cargar noticia:', error);
-      setNews(mockNewsDetail);
-      setRelatedNews(mockRelatedNews);
       setLoading(false);
     }
   };
@@ -281,15 +200,15 @@ const NewsDetails = () => {
               <div className="flex items-center space-x-4">
                 <img 
                   src={news.authorImage} 
-                  alt={news.author}
+                  alt={news.author.username}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
                   <p className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    {news.author}
+                    {news.author.username}
                   </p>
                   <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {news.authorBio}
+                    {"Comunicador social"}
                   </p>
                 </div>
               </div>
